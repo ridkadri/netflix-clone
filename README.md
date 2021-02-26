@@ -1,6 +1,6 @@
 # Netflix Clone
 
-This project was designed using React, Styled Components, Custom Hooks, Firebase Auth and Database
+This project was designed using React, Styled Components, Custom Hooks, Firebase Auth and Firestore
 
 ## Clone this repo
 
