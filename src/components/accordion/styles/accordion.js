@@ -55,8 +55,9 @@ export const Header = styled.div`
     width: 100%;
 
     img {
-        filter: brightness(0) invert(i);
+        filter: brightness(0) invert(1);
         width: 24px;
+        color: white;
 
         @media (max-width: 600px) {
             width: 16px;
