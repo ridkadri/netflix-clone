@@ -47,7 +47,7 @@ export default function SignUp() {
                             </Form.Submit>
 
                             <Form.Text>
-                                Have an account? <Form.Link to="/signin">Sign in now.</Form.Link>
+                                Already a user? <Form.Link to="/signin">Sign in now.</Form.Link>
                             </Form.Text>
 
                             <Form.TextSmall>

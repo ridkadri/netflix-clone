@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import {Route} from 'react-router-dom';
 import * as ROUTES from './constants/routes';
-import {Home, SignIn, SignUp} from './pages';
+import {Home, Browse, SignIn, SignUp} from './pages';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <SignUp/>
         </Route>
         <Route path={ROUTES.BROWSE}>
-          <p>I will be the browse page</p>
+          <Browse/>
         </Route>
         <Route path={ROUTES.HOME}>
           <Home/>
