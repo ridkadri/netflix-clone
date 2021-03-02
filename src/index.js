@@ -14,7 +14,6 @@ const config = {
     appId: "1:926819612748:web:66356283acb84b45c71ce9"
 }
 
-const firebase = window.firebase.initializeApp(config);
 
 ReactDOM.render(
     <FirebaseContext.Provider value={{firebase: window.firebase}}>
