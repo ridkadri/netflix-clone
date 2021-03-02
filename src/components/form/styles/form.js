@@ -80,6 +80,7 @@ export const Input = styled.input`
 export const Submit = styled.button`
     background: #e50914;
     border-radius: 4px;
+    outline: none;
     font-size: 16px;
     font-weight: bold;
     margin: 0 0 12px;
