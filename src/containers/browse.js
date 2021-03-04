@@ -9,6 +9,7 @@ export function BrowseContainer() {
     const [profile, setProfile] = useState({});
     const [category, setCategory] = useState('series');
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const {Firebase} = useContext(FirebaseContext);
 
@@ -33,6 +34,9 @@ export function BrowseContainer() {
                             onClick={()=> setCategory('films')}>
                             Films
                         </Header.Link>
+                    </Header.Group>
+                    <Header.Group>
+                        <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                     </Header.Group>
                 </Header.Frame>
 
