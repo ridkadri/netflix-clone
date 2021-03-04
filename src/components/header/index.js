@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Link as ReachRouterLink} from 'react-router-dom'
 import { 
-    Group, 
+    Group,
+    Picture,
+    Profile,
+    Dropdown, 
     Background, 
     Container, 
     Text, 
@@ -77,4 +80,18 @@ Header.FeatureCallOut = function HeaderFeatureCallOut({children, ...restProps}) 
 
 Header.PlayButton = function HeaderPlayButton({children, ...restProps}) {
     return <PlayButton {...restProps}>{children}</PlayButton>
+}
+
+//profile
+Header.Profile = function HeaderProfile({children, ...restProps}) {
+    return <Profile {...restProps}>{children}</Profile>
+}
+//picture
+Header.Picture = function HeaderPicture({src, ...restProps}) {
+    return <Picture {...restProps} src={`/images/user/${src}.png`}/>
+}
+
+//dropdown
+Header.Dropdown = function HeaderDropdown({children, ...restProps}) {
+    return <Dropdown {...restProps}>{children}</Dropdown>
 }
