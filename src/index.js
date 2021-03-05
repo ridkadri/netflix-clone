@@ -8,6 +8,7 @@ import {FirebaseContext} from './context/firebase';
 const config = {
     apiKey: "AIzaSyDNKI4FQsuA6pdysIKmSjgRKk7mRdGZyd0",
     authDomain: "netflix-clone-a60fc.firebaseapp.com",
+    databaseURL: "https://netflix-clone.firebaseio.com/",
     projectId: "netflix-clone-a60fc",
     storageBucket: "netflix-clone-a60fc.appspot.com",
     messagingSenderId: "926819612748",
@@ -15,6 +16,7 @@ const config = {
 }
 
 const firebase = window.firebase.initializeApp(config);
+//seedDatabase(firebase);
 
 ReactDOM.render(
     <FirebaseContext.Provider value={{firebase: window.firebase}}>
