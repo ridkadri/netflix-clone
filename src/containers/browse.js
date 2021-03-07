@@ -1,22 +1,23 @@
 import React, { useState, useEffect, useContext} from 'react'
-import {Loading, Header} from '../components';
+import {Card, Loading, Header} from '../components';
 import * as ROUTES from '../constants/routes';
 import {FirebaseContext} from '../context/firebase';
 import {SelectProfileContainer} from './profiles';
 import {FooterContainer} from './footer';
 
-export function BrowseContainer() {
+export function BrowseContainer({slides}) {
     const [profile, setProfile] = useState({});
     const [category, setCategory] = useState('series');
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [slideRows, setSlideRows] = useState([]);
 
     const {firebase} = useContext(FirebaseContext);
 
     const user = {
         displayName: "Karl",
         photoURL: "1"
-    }
+    };
 
     useEffect(() => {
         setTimeout(()=> {
@@ -24,13 +25,18 @@ export function BrowseContainer() {
         },3000);
     }, [user])
 
+    useEffect(()=> {
+        setSlideRows(slides[category])
+    },[slides, category]);
+
     return profile.displayName ? (
         <>
             {loading ? <Loading src={user.photoURL}/> : <Loading.ReleaseBody/>}
+
             <Header src='joker1' dontShowOnSmallViewPort>
                 <Header.Frame>
                     <Header.Group>
-                        <Header.Logo to={ROUTES.HOME} src='images/misc/logo.svg' alt='Netflix'/>
+                        <Header.Logo to={ROUTES.HOME} src='/images/misc/logo.svg' alt='Netflix'/>
                         <Header.Link
                             active={category === 'series' ? 'true' : 'false'}
                             onClick={()=> setCategory('series')}>
@@ -69,6 +75,28 @@ export function BrowseContainer() {
                     <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+
+            <Card.Group>
+                {slideRows.map((slideItem)=> (
+                    <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+                        <Card.Title>{slideItem.title}</Card.Title>
+                        <Card.Entities>
+                            {slideItem.data.map((item)=> (
+                                <Card.Item key={item.docId} item={item}>
+                                    <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}/>
+                                    <Card.Meta>
+                                        <Card.SubTitle>{item.title}</Card.SubTitle>
+                                        <Card.Text>{item.description}</Card.Text>
+                                    </Card.Meta>
+                                </Card.Item>
+                            ))}
+                        </Card.Entities>
+                        <Card.Feature category={category}>
+                            <p>I am the feature</p>
+                        </Card.Feature>
+                    </Card>
+                ))}
+            </Card.Group>
             <FooterContainer/>
         </>
     )
