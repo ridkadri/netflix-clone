@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext} from 'react'
+import Fuse from 'fuse.js'
 import {Card, Loading, Header} from '../components';
 import * as ROUTES from '../constants/routes';
 import {FirebaseContext} from '../context/firebase';
@@ -29,6 +30,17 @@ export function BrowseContainer({slides}) {
         setSlideRows(slides[category])
     },[slides, category]);
 
+    useEffect(()=> {
+        const fuse = new Fuse(slideRows, {keys: ['data.description', 'data.title', 'data.genre']});
+        const results = fuse.search(searchTerm).map(({item})=> item);
+
+        if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+            setSlideRows(results);
+        } else {
+            setSlideRows(slides[category]);
+        }
+    },[searchTerm])
+
     return profile.displayName ? (
         <>
             {loading ? <Loading src={user.photoURL}/> : <Loading.ReleaseBody/>}
@@ -55,7 +67,7 @@ export function BrowseContainer({slides}) {
                                 <Header.Dropdown>
                                     <Header.Group>
                                         <Header.Picture src={user.photoURL}/>
-                                        <Header.Link src={user.displayName}></Header.Link>
+                                        <Header.Link>{user.displayName}</Header.Link>
                                     </Header.Group>
                                     <Header.Group>
                                         <Header.Link onClick={()=> firebase.auth().signOut()}>Sign out</Header.Link>
@@ -77,7 +89,7 @@ export function BrowseContainer({slides}) {
             </Header>
 
             <Card.Group>
-                {slideRows.map((slideItem)=> (
+                {slideRows.map((slideItem) => (
                     <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
                         <Card.Title>{slideItem.title}</Card.Title>
                         <Card.Entities>
