@@ -14,4 +14,8 @@ Pages built include:
 
 ### `npm start or yarn start`
 
+### `Sign Up and Sign In`
+
+### `Navigate manually to /browse`
+
 ## Enjoy!
